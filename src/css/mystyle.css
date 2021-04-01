@@ -11,8 +11,52 @@
 .content {
     perspective: 340px;
     width: 100%;
+    height: 650px;
+    background-color: #131313;
     position: relative;
-    padding-top: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+/*显示当前图片*/
+.content img.on{
+    opacity: 1;
+}
+.content img{
+    max-width: 100%;
+    display:block;
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);    /* 自身尺寸的一半 */
+    margin:auto;
+    background-color: black;
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+.content img :hover{
+    box-shadow:2px 2px 2px 2px #ff9a27;
+}
+/*左右按钮*/
+.left, .right{
+    position: absolute;
+    top: 40%;
+    width: 65px;
+    height: 100px;
+    line-height: 100px;
+    background-color: transparent;
+    opacity: 0.5;
+    text-align: center;
+    font-size: 60px;
+    color: #ffffff;
+    display: none;    /*隐藏*/
+    cursor: pointer;    /*设置鼠标悬停时的样式*/
+}
+.left{
+    left: 0;
+}
+.right{
+    right: 0;
+}
+.content:hover .left, .content:hover .right{
+    display: block;
 }
 
 h3 {
@@ -46,7 +90,9 @@ h3 {
     right:0;
 }
 
-
+img:hover{
+    box-shadow:0 0 2px 1px #ff9a27;
+}
 span {
     display: block;
     text-align: center;
@@ -58,44 +104,20 @@ span {
     color: #696969;
 }
 
-@keyframes fly {
-    from {
-        transform: translateZ(0px);
-        opacity: .6;
-    }
-    to {
-        transform: translateZ(200px);
-        opacity: .8;
-    }
-}
+/*.title{*/
+/*    position: absolute;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    top: 300px;*/
+/*    margin: auto;*/
+/*    bottom: 0;*/
+/*    color: #fff;*/
+/*    font-size: 24px;*/
+/*    font-weight: 500;*/
+/*}*/
 
-.title {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    left: 0;
-    right: 0;
-    top: 300px;
-    margin: auto;
-    bottom: 0;
-    color: #fff;
-    font-size: 24px;
-    font-weight: 500;
-}
-
-.titles {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    left: 0;
-    right: 0;
-    top: 350px;
-    margin: auto;
-    bottom: 0;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 500;
-}
 
 .icon {
     width: 15px;
@@ -124,25 +146,9 @@ span {
     display: flex;
     justify-content: center;
     position: absolute;
-    right: 60px;
+    right: 20px;
     top:10px;
     margin: auto;
-}
-
-.ribbon:after,
-.ribbon:before {
-    margin-top: 0.5em;
-    content: "";
-    display: flex;
-    border: 1.5em solid black;
-}
-
-.ribbon:after {
-    border-right-color: transparent;
-}
-
-.ribbon:before {
-    border-left-color: transparent;
 }
 
 .ribbon a:link,
@@ -167,24 +173,6 @@ span {
     margin-top: 0;
 }
 
-.ribbon span:before {
-    content: "";
-    position: absolute;
-    top: 3em;
-    left: 0;
-    border-right: 0.5em solid #9B8651;
-    border-bottom: 0.5em solid #fff;
-}
-
-.ribbon span:after {
-    content: "";
-    position: absolute;
-    top: 3em;
-    right: 0;
-    border-left: 0.5em solid #9B8651;
-    border-bottom: 0.5em solid #fff;
-}
-
 .introduce {
     display: flex;
     flex-direction: column;
@@ -193,7 +181,7 @@ span {
 .introduce_item {
     display: flex;
     justify-content: center;
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 .introduce_item_imgtest {
@@ -242,6 +230,6 @@ span {
     letter-spacing: 5px;
     font-family: "Times New Roman",serif;
 }
-
-
-
+.introduce_item_more :hover{
+    color: blue;
+}

@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>搜索页面</title>
+    <title>搜索成功</title>
     <link href="./css/guide_style.css" rel="stylesheet">
     <link href="./css/search.css" rel="stylesheet">
 </head>
 <body>
-<!--导航栏-->
 <div class="home_header">
     <div class="home_left">
         <div style="font-size: 35px;color: whitesmoke;letter-spacing: 10px;text-align: left">Art Store</div>
@@ -19,11 +18,9 @@
             <a href='./search.html'><span>Search</span></a>
             <a href='./register.html'><span>Register</span></a>
             <a href='login.html'><span>Login</span></a>
-            <a href='collect.html'><span>Collect</span></a>
         </div>
     </div>
 </div>
-
 <div class="container">
     <form action="">
         <div class="searchTable" >
@@ -43,48 +40,17 @@
         <a href="show.html">Claude Monet</a>
         <a href="show.html">Auguste Rodin</a>
     </div>
-
 </div>
-<!--注：本次搜索界面只需要展示搜索结果界面的大致内容和基本布局，不需要进行“真正的搜索”。-->
-<!-- - 布局-->
-<!-- - 存在搜索为空的展示以及搜索结果的展示-+++++++++-->
-<!-- - 存在排序方式的筛选(lab2不作筛选要 求，但是必须存在该控件)-->
-<!-- - 存在分页，分页的样式不作需求(lab2只需要有分页控件，不需要对分页功能进行操作)-->
-<!-- - 搜索结果必须包含:艺术品的名称、作者、缩略图、简单介绍这4项 信息，其他信息不参与分数考量-->
-<!--- 组织样式不作限制-->
-<!--- 可以通过点击结果进入商品详情页面 (对方式不作限制，图中的查看按钮是一种方法)，因为存在筛选选项，因此可以适当显示 一些额外信息(例如热度)，不参与分数考量-->
-<!--​-->
-<div class="introduce">
-<div class="introduce_item">
-    <a href="show.html"><img class="introduce_item_imgtest" src="./img/15.jpg" alt=""></a>
-    <span class="introduce_item_title_1">
-                <span class="introduce_item_name">Three Women</span>
-                <span class="introduce_item_author">Pablo Picasso</span>
-                <span class="introduce_item_text">
-                This is one of the most important of Picasso's Cubist works. He made about seventy sketches and rough drafts for it.
-                The artist took the traditional subject of the Three Graces and reworked it in his own style.
-                </span>
-                <span class="introduce_item_more"><a href="show.html" >LEARN MORE</a></span>
-            </span>
-
-</div>
-</div>
-<div class="introduce">
-    <div class="introduce_item">
-        <a href="show.html"><img class="introduce_item_imgtest" src="./img/15.jpg" alt=""></a>
-        <span class="introduce_item_title_1">
-                <span class="introduce_item_name">Three Women</span>
-                <span class="introduce_item_author">Pablo Picasso</span>
-                <span class="introduce_item_text">
-                This is one of the most important of Picasso's Cubist works. He made about seventy sketches and rough drafts for it.
-                The artist took the traditional subject of the Three Graces and reworked it in his own style.
-                </span>
-                <span class="introduce_item_more"><a href="show.html" >LEARN MORE</a></span>
-            </span>
-
-    </div>
+<div class="nothing">
+    Can not Find
 </div>
 </body>
+<style>
+    .nothing{
+        font-size: 50px;
+        border: black;
+    }
+</style>
 <script>
     /* 点击按钮可以显示或隐藏下拉菜单 */
     function myFunction() {
