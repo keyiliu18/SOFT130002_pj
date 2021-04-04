@@ -1,10 +1,11 @@
+/*登陆样式*/
 html,body{
     width:100%;
     height:100%
 }
 body{
     background-color:#ffffff;
-    background-image:url("./back_img/login_background.jpg");;
+    background-image:url("./back_img/login_background.jpg");
     background-size: 100%;
 }
 #div_register{
@@ -16,6 +17,7 @@ body{
     top:20%;
     width: 500px;
     height: 350px;
+    border-radius: 16px;
 }
 #div_title{
     height: 60px;
@@ -30,6 +32,7 @@ body{
 .inputinfo{
     width: 80%;
     height:30px;
+    border-radius: 6px;
     margin: 20px 10%;
 }
 .submit_button{
@@ -37,12 +40,30 @@ body{
     height:40px;
     margin: 20px 10%;
     float: left;
+    background-color: #f8f8f4;
+    border-color: white;
+    font-family: Arial,serif;
+    border-radius: 12px;
+    font-size: 16px;
 }
 .login_button{
     width: 150px;
     height:40px;
     margin: 20px 10%;
     float: left;
+    background-color: #f8f8f4;
+    font-family: Arial,serif;
+    border-color: white;
+    border-radius: 12px;
+    font-size: 16px;
+}
+.submit_button:hover{
+    box-shadow: #ff9a27 0 0 1px 1px;
+    color: #ffb464;
+}
+.login_button:hover{
+    box-shadow: #ff9a27 0 0 1px 1px;
+    color: #ffb464;
 }
 #info{
     width:80%;
@@ -53,7 +74,11 @@ body{
     width: 300px;
     height:25px;
     margin: 10px 20%;
+    font-family: Arial,serif;
     background-color: transparent;
     border-color: transparent;
     color: white;
+}
+.to_homepage:hover{
+    color: #ff9a27;
 }

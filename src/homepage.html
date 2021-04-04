@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>首页</title>
     <link href="./css/mystyle.css" rel="stylesheet">
+    <link href="./css/guide_style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -11,28 +12,33 @@
 <div class="home_header">
     <div class="home_left">
         <div style="font-size: 35px;color: whitesmoke;letter-spacing: 10px;text-align: left">Art Store</div>
-        <div style="font-family: 'Copperplate Gothic Light',serif;letter-spacing: 6px;font-size: 16px;color: whitesmoke;text-align: left">Great art has always been the most decorative value.</div>
+        <div style="font-family:'Copperplate Gothic Light',serif;letter-spacing: 5px;font-size: 16px;color: whitesmoke;text-align: left">Great art has always been the most decorative value.</div>
     </div>
-<div class="home_right">
-         <div class='ribbon'>
+    <div class="home_right">
+         <div class="ribbon">
             <a href='./homepage.html'><span>Home</span></a>
             <a href='./search.html'><span>Search</span></a>
             <a href='./register.html'><span>Register</span></a>
             <a href='login.html'><span>Login</span></a>
+             <a href='collect.html'><span>Collect</span></a>
         </div>
-</div>
-
+    </div>
 </div>
 
 <!--头图与展示页-->
 <div class="home">
     <div class="content">
-        <img src="./img/174.jpg" style="display:block;position:relative;margin:auto;" alt="">
+        <a href="show.html"><img src="./img/174.jpg"  class="on" alt=""></a>
+        <a href="show.html"><img src="./img/35.jpg"  alt=""></a>
+        <a href="show.html"><img src="./img/48.jpg"  alt=""></a>
+<!--        <a href="show.html"><img src="img/28.jpg" style="max-width:100%;display:block;position:relative;margin:auto;" alt=""></a>&ndash;&gt;-->
+        <div class="left"> < </div>
+        <div class="right"> > </div>
     </div>
     <!--展示页-->
     <div class="introduce">
         <div class="introduce_item">
-            <img class="introduce_item_imgtest" src="./img/15.jpg" alt="">
+            <a href="show.html"><img class="introduce_item_imgtest" src="./img/15.jpg" alt=""></a>
             <span class="introduce_item_title_1">
                 <span class="introduce_item_name">Three Women</span>
                 <span class="introduce_item_author">Pablo Picasso</span>
@@ -56,11 +62,11 @@
                     </span>
                 <span class="introduce_item_more"> <a href="show.html" >LEARN MORE</a></span>
             </span>
-            <img class="introduce_item_imgtest" src="./img/36.jpg" alt="">
+            <a href="show.html"><img class="introduce_item_imgtest" src="./img/36.jpg" alt=""></a>
         </div>
 
         <div class="introduce_item">
-            <img class="introduce_item_imgtest" src="./img/16.jpg" alt="">
+            <a href="show.html"><img class="introduce_item_imgtest" src="./img/16.jpg" alt=""></a>
             <span class="introduce_item_title_1">
                 <span class="introduce_item_name">Woman and Child on the Seashore</span>
                  <span class="introduce_item_author">Pablo Picasso</span>
@@ -82,6 +88,45 @@
 </footer>
 </body>
 
+<script type="text/javascript">
+    var aImgs = document.querySelectorAll('.content img');
+    // var aLis = document.querySelectorAll('.content li');
+    var btLeft = document.querySelector('.content .left');
+    var btRight = document.querySelector('.content .right');
+    var index = 0;        //当前图片下标
+    var lastIndex = 0;
+    btRight.onclick = function(){
+        lastIndex = index;
+        //清除上一张图片的样式
+        aImgs[lastIndex].className = '';
+        index++;
+        index %= aImgs.length;
+        //设置当前图片的样式
+        aImgs[index].className = 'on';
+    }
+    //左边按钮类似
+    btLeft.onclick = function(){
+        lastIndex = index;
+        aImgs[lastIndex].className = '';
+        index--;
+        if (index < 0) {
+            index = aImgs.length - 1;
+        }
+        aImgs[index].className = 'on';
+    }
+    autoChange = function(){
+        lastIndex = index;
+        aImgs[lastIndex].className = '';
+        index++;
+        index %= aImgs.length;
+        aImgs[index].className = 'on';
+    }
+    // setInterval(autoChange,4000);
+    //    四秒换一张图
+
+</script>
+
+</body>
 
 </html>
 

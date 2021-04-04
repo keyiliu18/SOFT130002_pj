@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>search</title>
+    <title>Search Success</title>
     <link href="./css/guide_style.css" rel="stylesheet">
     <link href="./css/search.css" rel="stylesheet">
 </head>
 <body>
-<!--导航栏-->
 <div class="home_header">
     <div class="home_left">
         <div style="font-size: 35px;color: whitesmoke;letter-spacing: 10px;text-align: left">Art Store</div>
@@ -35,7 +34,7 @@
     </form>
     <form action="" class="parent">
         <input type="text" class="search" placeholder="search..." id="myInput" onkeyup="filterFunction()"  onclick="myFunction()">
-        <input type="button" class="btn" value="search" onclick="location.href='searchFail.html'">
+        <input type="button" class="btn" value="search" onclick="location.href='searchSuccess.html'">
     </form>
     <div id="myDropdown" class="dropdown-content">
         <a href="searchSuccess.html">Vincent van Gogh</a>
@@ -45,32 +44,33 @@
         <a href="searchFail.html">Nothing...</a>
     </div>
 </div>
-<!--<div class="introduce">-->
-<!--    <div class="introduce_item">-->
-<!--        <a href="show.html"><img class="introduce_item_imgtest" src="./img/15.jpg" alt=""></a>-->
-<!--        <span class="introduce_item_title">-->
-<!--                <span class="introduce_item_name">Three Women</span>-->
-<!--                <span class="introduce_item_author">Pablo Picasso</span>-->
-<!--                <span class="introduce_item_text">-->
-<!--                This is one of the most important of Picasso's Cubist works. He made about seventy sketches and rough drafts for it.-->
-<!--                The artist took the traditional subject of the Three Graces and reworked it in his own style.-->
-<!--                </span>-->
-<!--                <span class="introduce_item_more"><a href="show.html" >LEARN MORE</a></span>-->
-<!--            </span>-->
-<!--    </div>-->
-<!--</div>-->
-<div>
-<div class="pagination">
-    <span class="disabled" title="First">First</span>
-    <span class="disabled" title="Prev"><</span>
-    <span class="currentPage">1</span>
-    <span>2</span>
-    <span>3</span>
-    <span>4</span>
-    <span>5</span>
-    <span>></span>
-    <span title="Last">Last</span>
+<div class="searchResult">··· search result ···</div>
+<div class="introduce_item">
+    <a href="show.html"><img class="introduce_item_imgtest" src="./img/15.jpg" alt=""></a>
+    <span class="introduce_item_title">
+                <span class="introduce_item_name">Three Women</span>
+                <span class="introduce_item_author">Pablo Picasso</span>
+                <span class="introduce_item_text">
+                This is one of the most important of Picasso's Cubist works. He made about seventy sketches and rough drafts for it.
+                The artist took the traditional subject of the Three Graces and reworked it in his own style.
+                </span>
+                <span class="introduce_item_more"><a href="show.html" >Details</a></span>
+            </span>
+
 </div>
+</div>
+<div>
+    <div class="pagination">
+        <span class="disabled" title="First">First</span>
+        <span class="disabled" title="Prev"><</span>
+        <span class="currentPage">1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>></span>
+        <span title="Last">Last</span>
+    </div>
 </div>
 </body>
 <script>

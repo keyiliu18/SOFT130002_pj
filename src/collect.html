@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>collect</title>
+    <link href="./css/guide_style.css" rel="stylesheet">
+</head>
+<body>
+<!--
+注：本次的个人收藏界面只需要展示界面布局，适当在位置中添加一部分内容即可，对内
+容不做要求;
+
+- 布局:同上述界面，导航栏&搜索栏，存在个人收藏和个人信息两部分的展示栏，必须包含用户至少3项个人信息(即在注册界面填写过的)
+- 显示收藏的艺术品，显示样式，展示样式均不做需求，但是要保证相关信息中，至少存在:收藏艺术品的名称、作者、描述。-->
+<div class="home_header">
+    <div class="home_left">
+        <div style="font-size: 35px;color: whitesmoke;letter-spacing: 10px;text-align: left">Art Store</div>
+        <div style="font-family: 'Copperplate Gothic Light',serif;letter-spacing: 6px;font-size: 16px;color: whitesmoke;text-align: left">Great art has always been the most decorative value.</div>
+    </div>
+    <div class="home_right">
+        <div class='ribbon'>
+            <a href='./homepage.html'><span>Home</span></a>
+            <a href='./search.html'><span>Search</span></a>
+            <a href='./register.html'><span>Register</span></a>
+        </div>
+    </div>
+</div>
+
+<div class="back">
+    <div class="containerLeft">
+        <div class="introduce_item">
+            <a href="show.html"><img class="introduce_item_imgtest" src="./img/339.jpg" alt=""></a>
+            <span class="introduce_item_title">
+                <span class="introduce_item_name">Dance at Le Moulin de la Galette</span>
+                <span class="introduce_item_author">Pierre Auguste Renoir</span>
+                <span class="introduce_item_text">
+                    <em>Dance at Moulin de la Galette</em> is one of Impressionism’s most highly revered masterpieces. The scene is of a Sunday afternoon at Moulin de la Galette, where Parisians would typically dress up and spend all day dancing, drinking, and eating galettes, or flat cakes. The painting was in the collection of Gustave Caillebotte, but it was claimed by the French government upon his death due to the non payment of death duties. It was later transferred from the Luxembourg Museum, to the Louvre, and then later to the Musee d’Orsay.
+                    Its sale price at auction in 2009 was the fifth highest price ever paid for a painting at auction.
+               </span>
+                <span class="introduce_item_more"><a href="show.html" >Details</a></span>
+            </span>
+        </div>
+        <div class="introduce_item">
+            <a href="show.html"><img class="introduce_item_imgtest" src="./img/15.jpg" alt=""></a>
+            <span class="introduce_item_title">
+                <span class="introduce_item_name">Three Women</span>
+                <span class="introduce_item_author">Pablo Picasso</span>
+                <span class="introduce_item_text">
+                This is one of the most important of Picasso's Cubist works. He made about seventy sketches and rough drafts for it.
+                The artist took the traditional subject of the Three Graces and reworked it in his own style.
+                </span>
+                <span class="introduce_item_more"><a href="show.html" >Details</a></span>
+            </span>
+        </div>
+        <div class="introduce_item">
+            <a href="show.html"><img class="introduce_item_imgtest" src="./img/59.jpg" alt=""></a>
+            <span class="introduce_item_title">
+                <span class="introduce_item_name">Portrait of Dr. Gachet</span>
+                <span class="introduce_item_author">Vincent Van Gogh</span>
+                <span class="introduce_item_text">
+              <em>Portrait of Dr. Gachet</em> is one of the most revered paintings by Dutch artist Vincent van Gogh. It depicts Dr. Paul Gachet, who took care of him during the final months of his life. It was the only portrait painted by van Gogh during his stay at the doctor's home in Auvers-sur-Oise (27.2 km outside Paris), a 70 day period from May to July 1890.
+                    In 1990, it fetched a then-record price of $82.5 million ($75 million, plus a 10 percent buyer's commission) when sold at auction in New York
+                </span>
+                <span class="introduce_item_more"><a href="show.html" >Details</a></span>
+            </span>
+        </div>
+    </div>
+    <div class="containerRight">
+        <div style="margin-top: 100px">
+            <div class="introduce_page">
+                <a href="show.html"><img class="userImg" src="./imgElements/userImg.jpg" alt=""></a>
+                <span class="userInfo"><b>name: </b>Adam</span>
+                <hr/>
+                <span class="userInfo"><b>id: </b>2452462452</span>
+                <hr/>
+                <span class="userInfo"><b>email: </b>12345678901@123.com</span>
+                <hr/>
+                <div style="text-align: center;padding-top: 10px;padding-bottom: 10px">
+                    <input type="button" value=" more information " class="button" ></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<style>
+    a{
+        text-decoration:none;
+    }
+    a:hover{
+        color: #654132;
+    }
+    .back{
+        width:100%;
+        margin:0 auto;
+        position: relative;
+    }
+    .userInfo{
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-bottom:10px;
+        word-spacing: 7px;
+        font-family: Arial, serif;
+    }
+    .userImg{
+        width: 200px;
+        object-fit: cover;
+    }
+    .containerLeft{
+        width:74%;
+        height: 100%;
+        text-align: center;
+        top:0;
+        left:0;
+        overflow:hidden;
+    }
+    .containerRight{
+        width:26%;
+        height: 100%;
+        position: absolute;
+        overflow: hidden;
+        text-align: center;
+        background-color: #000000;
+        top:0;
+        right:0;
+    }
+
+    .introduce_page {
+        padding: 20px;
+        font-size: 20px;
+        color: white;
+        line-height: 36px;
+        align-self: center;
+    }
+    .button{
+        background-color: transparent;
+        border-color: transparent;
+        color: #ff9400;
+        font-size: 28px
+    }
+    .button:hover{
+        color: #ffffff;
+        background-color: #f18f1f;
+    }
+    .button:after{
+        color: #ffffff;
+        background-color: #e78619;
+    }
+    .introduce_item {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .introduce_item_imgtest {
+        width: 300px;
+        object-fit: cover;
+    }
+    .introduce_item_name{
+        font-size: 24px;
+        font-weight: bold;
+        align-self: center;
+        padding-bottom: 20px;
+    }
+    .introduce_item_author{
+        font-size: 20px;
+        font-weight: bold;
+        align-self: center;
+        padding-bottom: 10px;
+        font-family: "cursive",serif;
+    }
+    .introduce_item_text{
+        font-size: 18px;
+        text-align: justify;
+        padding-bottom: 20px;
+        margin: 20px;
+    }
+
+</style>
+</html>
