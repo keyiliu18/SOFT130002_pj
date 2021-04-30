@@ -13,6 +13,7 @@ div{
     text-align: center;
     overflow: hidden;
     padding-top: 100px;
+    margin-top: 20px;
     background-color: #000000;
     background-image: url("../img/174.jpg ");
 }

@@ -1,17 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>collect</title>
     <link href="./css/guide_style.css" rel="stylesheet">
 </head>
 <body>
-<!--
-注：本次的个人收藏界面只需要展示界面布局，适当在位置中添加一部分内容即可，对内
-容不做要求;
-
-- 布局:同上述界面，导航栏&搜索栏，存在个人收藏和个人信息两部分的展示栏，必须包含用户至少3项个人信息(即在注册界面填写过的)
-- 显示收藏的艺术品，显示样式，展示样式均不做需求，但是要保证相关信息中，至少存在:收藏艺术品的名称、作者、描述。-->
+<!--个人页面-->
 <div class="home_header">
     <div class="home_left">
         <div style="font-size: 35px;color: whitesmoke;letter-spacing: 10px;text-align: left">Art Store</div>
@@ -19,15 +14,18 @@
     </div>
     <div class="home_right">
         <div class='ribbon'>
-            <a href='./homepage.html'><span>Home</span></a>
-            <a href='./search.html'><span>Search</span></a>
+            <a id='homepage' onclick="jump('homepage.html')"><span style="color: white">Home</span></a>
+            <a id='search' onclick="jump('search.html')"><span style="color: white">Search</span></a>
         </div>
     </div>
 </div>
 
+<div id="breadcrumb"></div>
+<hr/>
+
 <div class="back">
     <div class="containerLeft">
-        <div class="introduce_item">
+        <div class="introduce_item" id="intro1">
             <a href="show.html"><img class="introduce_item_imgtest" src="./img/339.jpg" alt=""></a>
             <span class="introduce_item_title">
                 <span class="introduce_item_name">Dance at Le Moulin de la Galette</span>
@@ -36,10 +34,12 @@
                     <em>Dance at Moulin de la Galette</em> is one of Impressionism’s most highly revered masterpieces. The scene is of a Sunday afternoon at Moulin de la Galette, where Parisians would typically dress up and spend all day dancing, drinking, and eating galettes, or flat cakes. The painting was in the collection of Gustave Caillebotte, but it was claimed by the French government upon his death due to the non payment of death duties. It was later transferred from the Luxembourg Museum, to the Louvre, and then later to the Musee d’Orsay.
                     Its sale price at auction in 2009 was the fifth highest price ever paid for a painting at auction.
                </span>
+                <div style="display: flex">
                 <span class="introduce_item_more"><a href="show.html" >Details</a></span>
+                <span class="introduce_item_delete"><input type="button" value="DELETE" onclick="clearVal('intro1')"></span></div>
             </span>
         </div>
-        <div class="introduce_item">
+        <div class="introduce_item" id="intro2">
             <a href="show.html"><img class="introduce_item_imgtest" src="./img/15.jpg" alt=""></a>
             <span class="introduce_item_title">
                 <span class="introduce_item_name">Three Women</span>
@@ -48,10 +48,12 @@
                 This is one of the most important of Picasso's Cubist works. He made about seventy sketches and rough drafts for it.
                 The artist took the traditional subject of the Three Graces and reworked it in his own style.
                 </span>
+                <div style="display: flex">
                 <span class="introduce_item_more"><a href="show.html" >Details</a></span>
+                <span class="introduce_item_delete"><input type="button" value="DELETE" onclick="clearVal('intro2')"></span></div>
             </span>
         </div>
-        <div class="introduce_item">
+        <div class="introduce_item" id="intro3">
             <a href="show.html"><img class="introduce_item_imgtest" src="./img/59.jpg" alt=""></a>
             <span class="introduce_item_title">
                 <span class="introduce_item_name">Portrait of Dr. Gachet</span>
@@ -60,14 +62,15 @@
               <em>Portrait of Dr. Gachet</em> is one of the most revered paintings by Dutch artist Vincent van Gogh. It depicts Dr. Paul Gachet, who took care of him during the final months of his life. It was the only portrait painted by van Gogh during his stay at the doctor's home in Auvers-sur-Oise (27.2 km outside Paris), a 70 day period from May to July 1890.
                     In 1990, it fetched a then-record price of $82.5 million ($75 million, plus a 10 percent buyer's commission) when sold at auction in New York
                 </span>
+                <div style="display: flex">
                 <span class="introduce_item_more"><a href="show.html" >Details</a></span>
+                <span class="introduce_item_delete"><input type="button" value="DELETE" onclick="clearVal('intro3')"></span></div>
             </span>
         </div>
     </div>
     <div class="containerRight">
-        <div style="margin-top: 100px">
+        <div style="margin-top: 100px;position: fixed">
             <div class="introduce_page">
-                <a href="show.html"><img class="userImg" src="./imgElements/userImg.jpg" alt=""></a>
                 <a><img class="userImg" src="./imgElements/userImg.jpg" alt=""></a>
                 <span class="userInfo"><b>name: </b>Adam</span>
                 <hr/>
@@ -88,7 +91,10 @@
         text-decoration:none;
     }
     a:hover{
-        color: #654132;
+        color: #ec9002;
+    }
+    #breadcrumb{
+        margin: 20px;
     }
     .back{
         width:100%;
@@ -116,12 +122,12 @@
     }
     .containerRight{
         width:26%;
-        height: 100%;
-        position: absolute;
+        height: 80%;
+        position: fixed;
         overflow: hidden;
         text-align: center;
-        background-color: #000000;
-        top:0;
+        background-color: #575450;
+        top:120px;
         right:0;
     }
 
@@ -168,9 +174,12 @@
         color: whitesmoke;
         font-weight: bold;
         align-self: center;
-        padding-bottom: 10px;
         padding: 10px;
         font-family: "cursive",serif;
+    }
+    .introduce_item_more{
+        color: #717171;
+        margin: 0 40%;
     }
     .introduce_item_text{
         font-size: 18px;
@@ -178,9 +187,48 @@
         padding-bottom: 20px;
         margin: 20px;
     }
+    .introduce_item_delete{
+        left: 0;
+        color: white;
+        background-color: black;
+        padding: 5px;
+    }
+    .introduce_item_delete input{
+        background-color: transparent;
+        border: transparent;
+        color: white;
+    }
+    .introduce_item_delete:hover{
+        background-color: #f6901b;
+    }
     .introduce_item_imgtest:hover{
         box-shadow:0 0 2px 1px #ff9a27;
     }
 
 </style>
 </html>
+<script type="text/javascript"  src="js/crumb.js"></script>
+<script>
+    function clearVal(intro){
+        console.log(intro)
+        var id=document.getElementById(intro)
+        id.remove()
+    }
+
+    function onJump(path){
+        var i=0;
+        var jumpPath = path;
+        for(i=sessionStorage.length-1;i>=0;i--){
+            var getName=JSON.parse(sessionStorage.getItem(i.toString())).path_name
+            var stringName=JSON.stringify(getName)
+            var item =JSON.parse(sessionStorage.getItem(i.toString()));
+            console.log(":::"+item.path_name)
+            if(getName===path){
+                break;
+            }else {
+                sessionStorage.removeItem(i.toString())
+            }
+        }
+        window.location.href = jumpPath
+    }
+</script>

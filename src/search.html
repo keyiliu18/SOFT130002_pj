@@ -15,15 +15,17 @@
     </div>
     <div class="home_right">
         <div class='ribbon'>
-            <a href='./homepage.html'><span>Home</span></a>
-            <a href='./search.html'><span>Search</span></a>
+            <a id='homepage' onclick="jump('homepage.html')"><span style="color: white">Home</span></a>
+            <a id='search' onclick="jump('search.html')"><span style="color: white">Search</span></a>
             <a href='./register.html'><span>Register</span></a>
             <a href='login.html'><span>Login</span></a>
-            <a href='collect.html'><span>Collect</span></a>
+            <a id='collect' onclick="jump('collect.html')"><span style="color: white">Collect</span></a>
         </div>
     </div>
 </div>
 <!--搜索-->
+<div id="breadcrumb"></div>
+<hr/>
 <div class="container">
     <form action="">
         <div class="searchTable" >
@@ -73,6 +75,7 @@
 </div>
 </div>
 </body>
+<script type="text/javascript"  src="js/crumb.js"></script>
 <script>
     /* 点击按钮可以显示或隐藏下拉菜单 */
     function myFunction() {
