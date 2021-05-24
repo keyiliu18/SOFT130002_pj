@@ -3,12 +3,29 @@
     margin: 0;
     padding: 0
 }
-
+a{
+    cursor:pointer
+}
+#breadcrumb{
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
 .home {
     height: 100%;
     overflow: hidden;
 }
-
+.breadcrumb{
+    color: #894834;
+    font-size: large;
+    font-weight:bold;
+    padding: 0 4px;
+}
+.breadcrumb:hover{
+    color: #ff9a27;
+    font-size: large;
+    font-weight:bold;
+}
 .content {
     perspective: 340px;
     width: 100%;

@@ -7,32 +7,49 @@
 .home {
     height: 100%;
     overflow: hidden;
+    margin-top: 100px;
 }
 
 .content {
-    perspective: 340px;
     width: 100%;
-    height: 650px;
-    background-color: #131313;
-    position: relative;
-    margin-top: 20px;
     text-align: center;
+    margin-left: 40px;
+    margin-right:40px ;
+    height: 650px;
+    display:block;
+    background-color: #ffffff;
+}
+
+.content img{
+    max-width: 90%;
+}
+.content div{
+    position: absolute;
+    display:flex;
+    object-fit: cover;
+}
+
+/*显示当前图片*/
+.content .introduce_hot.on{
+    position: absolute;
+    opacity: 1;
+    max-width: 80%;
+    object-fit: cover;
+    margin-top: 30px;
 }
 /*显示当前图片*/
-.content img.on{
-    opacity: 1;
+.content .off{
+    display: none;
 }
-.content img{
-    max-width: 100%;
+.content .introduce_hot img{
+    max-width: 80%;
     display:block;
-    position: absolute; left: 50%; top: 50%;
     transform: translate(-50%, -50%);    /* 自身尺寸的一半 */
-    margin:auto;
     background-color: black;
     opacity: 0;
     transition-duration: 0.5s;
 }
-.content img :hover{
+.content .introduce_hot :hover{
     box-shadow:2px 2px 2px 2px #ff9a27;
 }
 /*左右按钮*/
@@ -46,18 +63,18 @@
     opacity: 0.5;
     text-align: center;
     font-size: 60px;
-    color: #ffffff;
+    color: #ec9737;
     display: none;    /*隐藏*/
     cursor: pointer;    /*设置鼠标悬停时的样式*/
 }
 .left{
-    left: 0;
+    left: 10px;
 }
 .right{
-    right: 0;
+    right: 10px;
 }
 .content:hover .left, .content:hover .right{
-    display: block;
+    display: flex;
 }
 
 h3 {
@@ -125,7 +142,10 @@ span {
     display: flex;
     flex-direction: column;
 }
-
+.introduce_hot{
+    display: flex;
+    flex-direction: column;
+}
 .introduce_item {
     display: flex;
     justify-content: center;
@@ -133,8 +153,9 @@ span {
 }
 
 .introduce_item_imgtest {
-    width: 600px;
+    width: 500px;
     object-fit: cover;
+    margin-top: 50px;
 }
 .introduce_item_name{
     font-size: 24px;
@@ -150,13 +171,23 @@ span {
     font-family: "cursive",serif;
 }
 .introduce_item_text{
-    font-size: 20px;
+    font-size: 15px;
     align-self: center;
     padding-bottom: 50px;
 }
-
+.introduce_item_text_hot{
+    font-size: 14px;
+    align-self: center;
+    padding-bottom: 50px;
+}
+.introduce_item_title_hot {
+    width: 350px;
+    font-size: 18px;
+    line-height: 32px;
+    align-self: center;
+}
 .introduce_item_title_1 {
-    width: 300px;
+    width: 350px;
     font-size: 18px;
     line-height: 36px;
     align-self: center;
@@ -164,14 +195,14 @@ span {
 }
 
 .introduce_item_title_2 {
-    width: 300px;
+    width: 350px;
     font-size: 18px;
     line-height: 36px;
     align-self: center;
     padding-right: 100px;
 }
 .introduce_item_more {
-    width: 300px;
+    width: 350px;
     font-size: 25px;
     line-height: 20px;
     align-self: center;

@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/register.css">
     <title>OK</title>
 </head>
@@ -11,22 +9,84 @@
 <div id="div_register">
     <div id="div_title"><h1>Register</h1></div>
     <div>
-        <label><input class="inputinfo" type="text" name="UserName" placeholder="username 请输入用户名"></label>
-        <label><input class="inputinfo" type="password" name="PassWord" placeholder="password 请输入密码"></label>
-        <label><input class="inputinfo" type="password" name="PassWord" placeholder="check password 请确认密码"></label>
-        <label><input class="inputinfo" type="text" name="Email" placeholder="email 请输入邮箱"></label>
+        <form action="login.html" name="register" onsubmit="return registerForm()" method="post">
+        <input class="inputinfo" type="text" name="UserName" placeholder="username 请输入用户名">
+            <div id="Un" class="errInfo"></div>
+        <input class="inputinfo" type="password" name="PassWord1" placeholder="password 请输入密码">
+            <div id="Pw1" class="errInfo"></div>
+        <input class="inputinfo" type="password" name="PassWord2" placeholder="check password 请确认密码">
+            <div id="Pw2" class="errInfo"></div>
+        <input class="inputinfo" type="text" name="Email" placeholder="email 请输入邮箱">
+            <div id="Email" class="errInfo"></div>
         <span style="text-align: center;color: white;margin-left: 40%;font-size: 14px">Profile picture</span>
         <div id="fileBox">
             <span> +</span>
        <input class="userImg" type="file" name="userImg" >
         </div>
+            <span><input type="submit" class="login_button" value="register"></span>
+        </form>
         <span>
             <input type="submit" class="submit_button" value="back to login" onclick="location.href='login.html'">
-        <input type="submit" class="login_button" value="register" onclick="location.href='register.html'">
         </span>
         <input type="submit" class="to_homepage" value=">>>homepage" onclick="location.href='homepage.html'">
     </div>
 
 </div>
 </body>
+<script>
+    function registerForm() {
+        var unMsg,pwMsg1,pwMsg2,eMsg;
+        var username = document.forms["register"]["UserName"].value;
+        var password1 = document.forms["register"]["PassWord1"].value;
+        var password2 = document.forms["register"]["PassWord2"].value;
+        var email = document.forms["register"]["Email"].value;
+        //邮箱：用户标识符+@+域名
+        var regEmail =/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+        //密码为数字+字母 长度2-32；
+        var regPw =/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{2,32}$/;
+        //用户提示信息
+        unMsg = document.getElementById("Un");
+        pwMsg1 = document.getElementById("Pw1");
+        pwMsg2 = document.getElementById("Pw2");
+        eMsg = document.getElementById("Email");
+        if (username === "" ) {
+            unMsg.innerHTML="用户名不能为空";
+            return false;
+        }else{
+            //清除提示
+            unMsg.style.display="none";
+        }
+        if(password1 ==="") {
+            pwMsg1.innerText = "密码不能为空";
+            return false;
+        }else if(!regPw.test(password1)){
+            pwMsg1.innerText = "密码必须由数字和字母组成";
+            return false;
+        }else{
+            //清除提示
+            pwMsg1.style.display="none";
+        }
+        if(password2 ===""){
+            pwMsg2.innerText="密码不能为空";
+            return false;
+        }else if(password2 !== password1){
+            pwMsg2.innerText="两次密码输入不一致";
+            return false;
+        }else {
+            //清除提示
+            pwMsg2.style.display="none";
+        }
+        if(email ===""){
+            eMsg.innerText="邮箱不能为空";
+            return false;
+        }else if(!regEmail.test(email)){
+            eMsg.innerText="请输入合法邮箱";
+            return false;
+        }else{
+            //清除提示
+            eMsg.style.display="none";
+        }
+        alert("注册成功");
+    }
+</script>
 </html>

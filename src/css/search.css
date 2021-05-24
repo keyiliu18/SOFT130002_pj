@@ -13,6 +13,7 @@ div{
     text-align: center;
     overflow: hidden;
     padding-top: 100px;
+    margin-top: 20px;
     background-color: #000000;
     background-image: url("../img/174.jpg ");
 }
@@ -55,12 +56,10 @@ div{
     display: flex;
     position: center;
     color: white;
-    width: 400px;
     height: 45px;
-    margin-left: 300px;
     background-color: black;
     justify-content: center;
-    margin-top: 40px;
+    padding-top: 10px;
 }
 .searchTable label{
     margin-left: 10px;

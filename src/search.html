@@ -15,50 +15,35 @@
     </div>
     <div class="home_right">
         <div class='ribbon'>
-            <a href='./homepage.html'><span>Home</span></a>
-            <a href='./search.html'><span>Search</span></a>
+            <a id='homepage' onclick="jump('homepage.php')"><span style="color: white">Home</span></a>
+<!--            <a id='search' onclick="jump('search.html')"><span style="color: white">Search</span></a>-->
             <a href='./register.html'><span>Register</span></a>
             <a href='login.html'><span>Login</span></a>
-            <a href='collect.html'><span>Collect</span></a>
+            <a id='collect' onclick="jump('Usercollect.php')"><span style="color: white">Collect</span></a>
         </div>
     </div>
 </div>
 <!--搜索-->
+<div id="breadcrumb"></div>
+<hr/>
 <div class="container">
-    <form action="">
+
+    <form action="searchResult.php" class="parent" method="post">
         <div class="searchTable" >
-            <label><input type="radio" checked="checked"  name="item"/> Artist</label><br>
-            <label><input type="radio" name="item" /> Art work</label><br>
-            <label><input type="checkbox"/>1800</label><br>
-            <label> <input type="checkbox" />1900</label>
+            <!--            <label><input type="radio" checked="checked"  name="item"/> Artist</label><br>-->
+            <!--            <label><input type="radio" name="item" /> Art work</label><br>-->
+            <label><input type="checkbox" name="type[]" value="artist" checked="checked"/>Artist</label><br>
+            <label><input type="checkbox"name="type[]" value="title">Art work</label><br>
+            <label> <input type="checkbox" name="type[]" value="description"/>Description</label>
         </div>
+
+        <input type="text" name="search_req" class="search" autocomplete="off"
+               placeholder="search..." id="myInput" onkeyup="filterFunction()"  onclick="myFunction()">
+        <input type="submit" class="btn" value="search" >
+
     </form>
-    <form action="" class="parent">
-        <input type="text" class="search" placeholder="search..." id="myInput" onkeyup="filterFunction()"  onclick="myFunction()">
-        <input type="button" class="btn" value="search" onclick="location.href='searchFail.html'">
-    </form>
-    <div id="myDropdown" class="dropdown-content">
-        <a href="searchSuccess.html">Vincent van Gogh</a>
-        <a href="searchSuccess.html">Rembrandt Harmenszoon van Rijn</a>
-        <a href="searchSuccess.html">Claude Monet</a>
-        <a href="searchSuccess.html">Auguste Rodin</a>
-        <a href="searchFail.html">Nothing...</a>
-    </div>
+
 </div>
-<!--<div class="introduce">-->
-<!--    <div class="introduce_item">-->
-<!--        <a href="show.html"><img class="introduce_item_imgtest" src="./img/15.jpg" alt=""></a>-->
-<!--        <span class="introduce_item_title">-->
-<!--                <span class="introduce_item_name">Three Women</span>-->
-<!--                <span class="introduce_item_author">Pablo Picasso</span>-->
-<!--                <span class="introduce_item_text">-->
-<!--                This is one of the most important of Picasso's Cubist works. He made about seventy sketches and rough drafts for it.-->
-<!--                The artist took the traditional subject of the Three Graces and reworked it in his own style.-->
-<!--                </span>-->
-<!--                <span class="introduce_item_more"><a href="show.html" >LEARN MORE</a></span>-->
-<!--            </span>-->
-<!--    </div>-->
-<!--</div>-->
 <div>
 <div class="pagination">
     <span class="disabled" title="First">First</span>
@@ -73,6 +58,7 @@
 </div>
 </div>
 </body>
+<script type="text/javascript"  src="js/crumb.js"></script>
 <script>
     /* 点击按钮可以显示或隐藏下拉菜单 */
     function myFunction() {

@@ -12,7 +12,6 @@
         text-decoration:none;
     }
     a:hover{
-        color: #654132;
         color: #ffa300;
     }
     .back{
@@ -49,6 +48,12 @@
         color: grey;
         font-size: 20px
     }
+    .collected{
+        background-color: transparent;
+        border-color: transparent;
+        color:#a04300;
+        font-size: 20px
+    }
     .button:hover{
         color: #ffffff;
         background-color: #f18f1f;
@@ -66,14 +71,16 @@
     </div>
     <div class="home_right">
         <div class='ribbon'>
-            <a href='./homepage.html'><span>Home</span></a>
+            <a id='homepage' onclick="jump('homepage.html')"><span style="color: white">Home</span></a>
+            <a id='search' onclick="jump('search.html')"><span style="color: white">Search</span></a>
+            <a id='collect' onclick="jump('collect.html')"><span style="color: white">Collect</span></a>
             <a href='./login.html'><span>Not Logged</span></a>
-            <a href='collect.html'><span>Collect</span></a>
         </div>
 
     </div>
-
 </div>
+<div id="breadcrumb"></div>
+<hr/>
 <hr/>
 <div class="back">
     <div class="containerLeft">
@@ -97,11 +104,46 @@
           <span style="padding-top: 15px;padding-bottom:10px ">1934</span>
              <hr/>
             <div style="text-align: center;padding-top: 10px;padding-bottom: 10px">
-                <input type="button" value=" COLLECT " class="button" ></div>
+                <input type="button" value=" COLLECT " class="button" id="cButton" onclick="collected()" ></div>
         </div>
         </div>
     </div>
 
 </div>
 </body>
+<script type="text/javascript"  src="js/crumb.js"></script>
+<script>
+    function collected(){
+        document.getElementById('cButton').value="COLLECTED";
+        document.getElementById('cButton').className="collected";
+       alert("收藏成功!")
+    }
+    function showSite(str)
+    {
+        if (str==="")
+        {
+            document.getElementById("txtHint").innerHTML="";
+            return;
+        }
+        if (window.XMLHttpRequest)
+        {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState===4 && xmlhttp.status===200)
+            {
+                document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../php/item_info_mysql.php?q="+str,true);
+        xmlhttp.send();
+    }
+</script>
 </html>

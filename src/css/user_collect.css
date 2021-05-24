@@ -1,0 +1,118 @@
+
+a{
+    text-decoration:none;
+}
+a:hover{
+    color: #ec9002;
+}
+#breadcrumb{
+    margin: 20px;
+}
+.back{
+    width:100%;
+    margin:0 auto;
+    position: relative;
+}
+.userInfo{
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom:10px;
+    word-spacing: 7px;
+    font-family: Arial, serif;
+}
+.userImg{
+    width: 200px;
+    object-fit: cover;
+}
+.containerLeft{
+    width:74%;
+    height: 100%;
+    text-align: center;
+    top:0;
+    left:0;
+    overflow:hidden;
+}
+.containerRight{
+    width:26%;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+    text-align: center;
+    background-color: #575450;
+    top:100px;
+    right:0;
+}
+
+.introduce_page {
+    padding: 20px;
+    font-size: 20px;
+    color: white;
+    line-height: 36px;
+    align-self: center;
+}
+.button{
+    background-color: transparent;
+    border-color: transparent;
+    color: #ff9400;
+    font-size: 28px
+}
+.button:hover{
+    color: #ffffff;
+    background-color: #f18f1f;
+}
+.button:after{
+    color: #ffffff;
+    background-color: #e78619;
+}
+.introduce_item {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.introduce_item_imgtest {
+    width: 300px;
+    object-fit: cover;
+}
+.introduce_item_name{
+    font-size: 24px;
+    font-weight: bold;
+    align-self: center;
+    padding-bottom: 20px;
+}
+.introduce_item_author{
+    font-size: 20px;
+    background-color: #393837;
+    color: whitesmoke;
+    font-weight: bold;
+    align-self: center;
+    padding: 10px;
+    font-family: "cursive",serif;
+}
+.introduce_item_more{
+    color: #717171;
+    margin: 0 40%;
+}
+.introduce_item_text{
+    font-size: 18px;
+    text-align: justify;
+    padding-bottom: 20px;
+    margin: 20px;
+}
+.introduce_item_delete{
+    left: 0;
+    color: white;
+    background-color: black;
+    padding: 5px;
+}
+.introduce_item_delete input{
+    background-color: transparent;
+    border: transparent;
+    color: white;
+}
+.introduce_item_delete:hover{
+    background-color: #f6901b;
+}
+.introduce_item_imgtest:hover{
+    box-shadow:0 0 2px 1px #ff9a27;
+}

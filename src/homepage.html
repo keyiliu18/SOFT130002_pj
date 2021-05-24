@@ -16,15 +16,17 @@
     </div>
     <div class="home_right">
          <div class="ribbon">
-            <a href='./homepage.html'><span>Home</span></a>
-            <a href='./search.html'><span>Search</span></a>
-            <a href='./register.html'><span>Register</span></a>
-            <a href='login.html'><span>Login</span></a>
-             <a href='collect.html'><span>Collect</span></a>
+             <a id='homepage' onclick="jump('homepage.html')"><span style="color: white">Home</span></a>
+             <a id='search' onclick="jump('search.html')"><span style="color: white">Search</span></a>
+             <a href='./register.html'><span>Register</span></a>
+             <a href='login.html'><span>Login</span></a>
+             <a id='collect' onclick="jump('collect.html')"><span style="color: white">Collect</span></a>
         </div>
     </div>
 </div>
-
+<div id="breadcrumb"></div>
+<hr/>
+<!--<tr></tr>-->
 <!--头图与展示页-->
 <div class="home">
     <div class="content">
@@ -87,7 +89,9 @@
     </div>
 </footer>
 </body>
+<script type="text/javascript"  src="js/crumb.js"></script>
 
+</script>
 <script type="text/javascript">
     var aImgs = document.querySelectorAll('.content img');
     var btLeft = document.querySelector('.content .left');
@@ -120,8 +124,6 @@
         index %= aImgs.length;
         aImgs[index].className = 'on';
     }
-    // setInterval(autoChange,4000);
-    //    四秒换一张图
     setInterval(autoChange,4000);
        //四秒换一张图
 
