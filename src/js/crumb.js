@@ -4,7 +4,6 @@ function jump(path){
     for(i=0;i<sessionStorage.length;i++){
         var getName=JSON.parse(sessionStorage.getItem(i.toString())).path_name
         if(getName === path){
-    //        console.log(true)
             break;
         }
     }
@@ -20,7 +19,7 @@ function jump(path){
             sessionStorage.removeItem(i.toString())
         }
     }
-  //  console.log(":::"+window.location)
+    console.log(":::"+window.location)
     window.location.href = jumpPath
 }
 
@@ -70,3 +69,7 @@ window.onload=function() {
         }
 
     }
+
+
+
+

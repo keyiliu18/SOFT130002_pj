@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
+    <!-- 引入 Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/mystyle.css" rel="stylesheet">
     <link href="css/guide_style.css" rel="stylesheet">
     <link href="./css/search.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <?php
@@ -32,15 +36,17 @@ EOF;
 ?>
 <?php
 include('php/config.php');
-
+include('php/search_sort.php');
 @$search_req =$_POST['search_req'];
 @$search_type=$_POST['type'];
+//$order=$_POST['order1'];
+//echo $order;
 $length=$search_type?count($search_type):0;
+$show=array();
+
 $list = "SELECT * FROM artworks";
 for($i=0;$i<$length;$i++){
     $lists[] = "($search_type[$i] LIKE '%".$search_req."%')";
-//    echo $search_type[$i];
-//    echo '</br>';
 }
 if($length>0) {
     $list_type = implode(" OR ", $lists);
@@ -49,7 +55,6 @@ if($length>0) {
     $list = "SELECT * FROM artworks  WHERE (title LIKE '%".$search_req."%') OR (artist LIKE '%".$search_req."%')OR (description LIKE '%".$search_req."%') ORDER BY `artworks`.`view` DESC";
 }
 $list=$list."ORDER BY `artworks`.`view` DESC";
-echo $list.'</br>';
 //$list = "SELECT * FROM artworks  WHERE (title LIKE '%".$search_req."%') OR (artist LIKE '%".$search_req."%') ORDER BY `artworks`.`view` DESC";
 $result = mysqli_query($con,$list);
 echo <<<EOF
@@ -64,16 +69,31 @@ echo <<<EOF
         </div>
 
         <input type="text" name="search_req" class="search" autocomplete="off"
-               placeholder="search..." id="myInput" onkeyup="filterFunction()"  onclick="myFunction()">
+               placeholder="search..." id="myInput">
         <input type="submit" class="btn" value="search" >
 
     </form>
+
 </div>
 EOF;
-//usort($domain_arr, function($a, $b) {
-//    return $a->attribute< $b->attribute? 1 : -1;
-//});
 while ($row = mysqli_fetch_array($result)) {
+    $price=$row['price'];
+    $view = $row['view'];
+    $show[]=$row;
+}
+echo <<<EOF
+<div>
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary" value="view,asc" onclick="viewOrder(this.value)">view asc</button>
+    <button type="button" class="btn btn-primary" value="view,desc" onclick="viewOrder(this.value)">view desc</button>
+    <button type="button" class="btn btn-primary" value="price,asc" onclick="viewOrder(this.value)">price asc</button>
+    <button type="button" class="btn btn-primary" value="price,desc" onclick="viewOrder(this.value)">price desc</button>
+  </div>
+</div>
+EOF;
+usort($show,'my_sort_view');
+for($i=0;$i<count($show);$i++){
+    $row=$show[$i];
     $title = $row['title'];
     $author = $row['artist'];
     $text = $row['description'];
@@ -93,7 +113,7 @@ while ($row = mysqli_fetch_array($result)) {
             </span>
     </div><hr/>
 EOT;
-}
+};
 echo <<<EOT
 <div>
 <div class="pagination">
@@ -113,3 +133,34 @@ mysqli_free_result($result);
 ?>
 </body>
 <script type="text/javascript"  src="js/crumb.js"></script>
+
+<script >
+    function viewOrder(val){
+        console.log(val);
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+               // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+             //   alert(xmlhttp.responseText)
+            }
+        }
+
+        var send_msg="registration=success&order="+val;
+        xmlhttp.open("POST","searchOrdered.php",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send(send_msg);
+    }
+
+</script>

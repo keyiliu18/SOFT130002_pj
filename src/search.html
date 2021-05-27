@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>search</title>
-    <link href="./css/guide_style.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/mystyle.css" rel="stylesheet">
+    <link href="css/guide_style.css" rel="stylesheet">
     <link href="./css/search.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <!--导航栏-->
@@ -28,21 +32,31 @@
 <hr/>
 <div class="container">
 
-    <form action="searchResult.php" class="parent" method="post">
+    <form class="parent" name="searchForm"  onsubmit="return false">
         <div class="searchTable" >
             <!--            <label><input type="radio" checked="checked"  name="item"/> Artist</label><br>-->
             <!--            <label><input type="radio" name="item" /> Art work</label><br>-->
-            <label><input type="checkbox" name="type[]" value="artist" checked="checked"/>Artist</label><br>
-            <label><input type="checkbox"name="type[]" value="title">Art work</label><br>
-            <label> <input type="checkbox" name="type[]" value="description"/>Description</label>
+            <label><input type="checkbox" name="type" value="artist" checked="checked"/>Artist</label><br>
+            <label><input type="checkbox" name="type" value="title">Art work</label><br>
+            <label> <input type="checkbox" name="type" value="description"/>Description</label>
         </div>
 
-        <input type="text" name="search_req" class="search" autocomplete="off"
-               placeholder="search..." id="myInput" onkeyup="filterFunction()"  onclick="myFunction()">
-        <input type="submit" class="btn" value="search" >
+       <input type="text" name="search_req" class="search" autocomplete="off"
+                                            placeholder="search..." id="myInput">
+        <input type="submit" class="btn" value="search" onclick="searchResult()" >
 
     </form>
-
+    <div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" value="view,asc" onclick="viewOrder(this.value)">view asc</button>
+            <button type="button" class="btn btn-primary" value="view,desc" onclick="viewOrder(this.value)">view desc</button>
+            <button type="button" class="btn btn-primary" value="price,asc" onclick="viewOrder(this.value)">price asc</button>
+            <button type="button" class="btn btn-primary" value="price,desc" onclick="viewOrder(this.value)">price desc</button>
+        </div>
+    </div>
+</div>
+<div class="introduce" id="Order"></div>
+<div class="introduce" id="searchResult">
 </div>
 <div>
 <div class="pagination">
@@ -60,22 +74,75 @@
 </body>
 <script type="text/javascript"  src="js/crumb.js"></script>
 <script>
-    /* 点击按钮可以显示或隐藏下拉菜单 */
-    function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
+    function viewOrder(val){
+        console.log(val);
+        var artist= document.forms["searchForm"]["type"];
+        var input= document.forms["searchForm"]["search_req"].value;
+        var len=artist.length;
+        var send_msg="registration=success&order="+val;
+        for(var i=0;i<len;i++){
+            if (artist[i].checked)
+                send_msg+="&type[]="+artist[i].value;
+        }
+        send_msg+="&search_req="+input;
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState===4&&xmlhttp.status===200)
+            {
+                document.getElementById("Order").innerHTML=xmlhttp.responseText;
+             //   alert(xmlhttp.responseText)
+            }
+        }
+        console.log(send_msg)
+        xmlhttp.open("POST","php/search_result.php",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send(send_msg);
     }
 
-    function filterFunction() {
-        var input, filter,a, i;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        div = document.getElementById("myDropdown");
-        a = div.getElementsByTagName("a");
-        for (i = 0; i < a.length; i++) {
-            if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "flex";
-            } else {
-                a[i].style.display = "none";
+    function searchResult(){
+        console.log("调用搜索")
+       var artist= document.forms["searchForm"]["type"];
+       var input= document.forms["searchForm"]["search_req"].value;
+       var len=artist.length;
+       var send_msg="registration=success"
+       for(var i=0;i<len;i++){
+           if (artist[i].checked)
+               send_msg+="&type[]="+artist[i].value;
+           }
+send_msg+="&search_req="+input;
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        console.log(send_msg)
+        xmlhttp.open("POST","php/search_result.php",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send(send_msg);
+        xmlhttp.onreadystatechange=function()
+        {
+            if ( xmlhttp.status===200)
+            {
+                document.getElementById("searchResult").innerHTML=xmlhttp.responseText;
+               //
+            }else{
+                alert("wrong:"+xmlhttp.status)
             }
         }
     }
