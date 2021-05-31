@@ -120,28 +120,23 @@
            }
 send_msg+="&search_req="+input;
         var xmlhttp;
-        if (window.XMLHttpRequest)
-        {
+        if (window.XMLHttpRequest){
             // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
             xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {
+        } else {
             // IE6, IE5 浏览器执行代码
             xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
-
         console.log(send_msg)
         xmlhttp.open("POST","php/search_result.php",true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         xmlhttp.send(send_msg);
         xmlhttp.onreadystatechange=function()
         {
-            if ( xmlhttp.status===200)
-            {
+            if ( xmlhttp.status===200) {
                 document.getElementById("searchResult").innerHTML=xmlhttp.responseText;
                //
-            }else{
+                }else{
                 alert("wrong:"+xmlhttp.status)
             }
         }

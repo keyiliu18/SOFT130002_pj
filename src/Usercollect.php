@@ -54,7 +54,8 @@ while($row = mysqli_fetch_array($result))
                         <span class="introduce_item_delete">
                          <form action="" method="post" onsubmit="return comf('$title')">             
                         <input type="hidden" name='listID' value=$list_id>    
-                        <input type="hidden" name='showID' value='intro$list_id'>                            
+                        <input type="hidden" name='showID' value='intro$list_id'>        
+                        <input type="hidden" name='userID' value=$user>                            
                         <input type="submit" value="DELETE" onclick="myFunction('$title')">
                     </form>                   
                     </span>

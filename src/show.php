@@ -42,8 +42,6 @@ $success=false;
 $user='1';
 while($wish_row = mysqli_fetch_array($result2)){
 if($wish_row) {
-    echo $user;
-    echo $art_id;
     if($wish_row['userID'] ==='1'){//如果是当前登录用户
     $collect_mag="COLLECTED";
     break;

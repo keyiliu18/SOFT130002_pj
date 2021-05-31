@@ -10,19 +10,11 @@
 <div>
 <?php include './components/header.php'?></div>
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "123456";
+include('php/config.php');
     $num=3;$num_h=3;
     // 创建连接
-    $conn = new mysqli($servername, $username, $password);
-    // 检测连接
-    if ($conn->connect_error) {
-        die("连接失败: " . $conn->connect_error);
-    }
-    mysqli_select_db($conn,"artworks");
-    $art_result = mysqli_query($conn,"SELECT * FROM artworks ORDER BY `artworks`.`timeReleased` DESC");
-    $hot_art=mysqli_query($conn,"SELECT * FROM artworks ORDER BY `artworks`.`view` DESC");
+    $art_result = mysqli_query($con,"SELECT * FROM artworks ORDER BY `artworks`.`timeReleased` DESC");
+    $hot_art=mysqli_query($con,"SELECT * FROM artworks ORDER BY `artworks`.`view` DESC");
 
     echo <<<EOT
 <div class="home">
