@@ -1,6 +1,6 @@
 <?php
 include('config.php');
-$list = "SELECT * FROM `artworks` ORDER BY `artworks`.`view` DESC";
+$list = "SELECT * FROM `artworks` ORDER BY `artworks`.`view` DESC".$limit;
 $result = mysqli_query($con, $list);
 while ($row = mysqli_fetch_array($result)) {
     $price = $row['price'];

@@ -9,10 +9,10 @@
 <div id="div_register">
     <div id="div_title"><h1>Login</h1></div>
     <div>
-        <form action="show.html" name="login" onsubmit="return loginForm()" method="post">
+        <form action="php/login_check.php" name="login" onsubmit="return false" method="post">
             <input class="inputinfo" type="text" name="UserName" placeholder="username请输入用户名">
             <input class="inputinfo" type="password" name="PassWord" placeholder="password请输入密码">
-        <span><input type="submit" class="submit_button" value="login" ></span>
+        <span><input type="submit" class="submit_button" value="login" onclick="loginForm()" ></span>
         </form>
         <span><input type="submit" class="login_button" value="register" onclick="location.href='register.html'"></span>
         <input type="submit" class="to_homepage" value=">>>back to homepage" onclick="location.href='homepage.php'">
@@ -20,16 +20,49 @@
 
 </div>
 </body>
+
 <script>
     function loginForm() {
         var username = document.forms["login"]["UserName"].value;
         var password = document.forms["login"]["PassWord"].value;
+        //上一个页面
+        var getName=JSON.parse(sessionStorage.getItem((sessionStorage.length-1).toString())).path_name
+        console.log(getName)
         if (username === "" ||  password=== "" ||username==null || password==null) {
             alert("用户名或密码不能为空！");
             return false;
         }else{
-            alert("登陆成功");
+            var send_msg="registration=success"
+            send_msg+="&username="+username+"&password="+password;
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {
+                xmlhttp=new XMLHttpRequest();
+            }else{
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            console.log(send_msg)
+            xmlhttp.open("POST","php/login_check.php",true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlhttp.send(send_msg);
+            xmlhttp.onreadystatechange=function()
+            {
+                console.log(xmlhttp.readyState)
+                if (xmlhttp.readyState===4){
+                    if(xmlhttp.status===200){
+                        if(xmlhttp.responseText ==='success'){
+                            alert('success login!')
+                            window.location.href = getName;//跳转到上一个页面
+                        }else{
+                            alert(xmlhttp.responseText)
+                        }
+                    }else{
+                        alert("wrong:"+xmlhttp.status)
+                    }
+                }
+            }
         }
+
     }
 </script>
 </html>

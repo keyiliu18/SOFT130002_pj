@@ -76,7 +76,7 @@ mysqli_free_result($art_result);
 function writeName($title_h,$img_h,$text_h)
 {
     echo <<<EO
-    
+     
     <div class="introduce_hot">
     <a href="show.php?q=$title_h"><img src="img/$img_h.jpg" class="on" alt=""onclick="chosen('$title_h')"></a>
             <span class="introduce_item_title_hot">
@@ -98,5 +98,4 @@ EO;
 </html>
 <script type="text/javascript"  src="js/crumb.js"></script>
 <script type="text/javascript" src="js/homepage.js"></script>
-
-
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>

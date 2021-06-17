@@ -1,11 +1,18 @@
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>首页</title>-->
-<!--    <link href="../css/mystyle.css" rel="stylesheet">-->
-<!--    <link href="../css/guide_style.css" rel="stylesheet">-->
-<!--</head>-->
 <?php
-echo  <<<EOT
+//  防止全局变量造成安全隐患
+$admin = false;
+//  启动会话，这步必不可少
+session_start();
+$meg='Login';
+$login_fuc="<a href='./login.html'><span>$meg</span></a>";
+//  判断是否登陆
+if (isset($_SESSION["userLogin"]) && $_SESSION["userLogin"] === true){
+    $meg ='LogOut';
+    $login_fuc="<a href='' onclick='logout()'><span>$meg</span></a>";
+}else{
+    $meg='Login';
+}
+    echo <<<EOT
 <!--<div class="home_header">-->
 <div class="home_header">
     <div class="home_left">
@@ -16,13 +23,15 @@ echo  <<<EOT
          <div class="ribbon">
              <a id='homepage' onclick="jump('homepage.php')"><span style="color: white">Home</span></a>
              <a id='search' onclick="jump('search.html')"><span style="color: white">Search</span></a>
-             <a href='../register.html'><span>Register</span></a>
-             <a href='../login.html'><span>Login</span></a>
+             <a href='./register.html'><span>Register</span></a>
+                $login_fuc
+<!--             <a href='./login.html'><span>$meg</span></a>-->
              <a id='collect' onclick="jump('Usercollect.php')"><span style="color: white">Collect</span></a>
         </div>
     </div>
 </div>
 <div id="breadcrumb"></div>
 <hr/>
-EOT
+EOT;
+
 ?>

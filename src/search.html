@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>search</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
     <link href="css/mystyle.css" rel="stylesheet">
     <link href="css/guide_style.css" rel="stylesheet">
     <link href="./css/search.css" rel="stylesheet">
@@ -20,7 +21,6 @@
     <div class="home_right">
         <div class='ribbon'>
             <a id='homepage' onclick="jump('homepage.php')"><span style="color: white">Home</span></a>
-<!--            <a id='search' onclick="jump('search.html')"><span style="color: white">Search</span></a>-->
             <a href='./register.html'><span>Register</span></a>
             <a href='login.html'><span>Login</span></a>
             <a id='collect' onclick="jump('Usercollect.php')"><span style="color: white">Collect</span></a>
@@ -56,24 +56,39 @@
     </div>
 </div>
 <div class="introduce" id="Order"></div>
-<div class="introduce" id="searchResult">
-</div>
-<div>
-<div class="pagination">
-    <span class="disabled" title="First">First</span>
-    <span class="disabled" title="Prev"><</span>
-    <span class="currentPage">1</span>
-    <span>2</span>
-    <span>3</span>
-    <span>4</span>
-    <span>5</span>
-    <span>></span>
-    <span title="Last">Last</span>
-</div>
-</div>
+<div class="introduce" id="searchResult"></div>
+
+<!--<div>-->
+<!--<div class="pagination">-->
+<!--    <span class="disabled" title="First">First</span>-->
+<!--    <span class="disabled" title="Prev"><</span>-->
+<!--    <span class="currentPage">1</span>-->
+<!--    <span>2</span>-->
+<!--    <span>3</span>-->
+<!--    <span>4</span>-->
+<!--    <span>5</span>-->
+<!--    <span>></span>-->
+<!--    <span title="Last">Last</span>-->
+<!--</div>-->
+<!--</div>-->
+<!--<input type="hidden" id="currentPage" value="1">-->
+<!--<input type="hidden" id="totalPages" value="">-->
+<!--<ul class="pagination">-->
+<!--    <li><a href="#">&laquo;</a></li>-->
+<!--    <li><a href="#">1</a></li>-->
+<!--    <li><a href="#">2</a></li>-->
+<!--    <li><a href="#">3</a></li>-->
+<!--    <li><a href="#">4</a></li>-->
+<!--    <li><a href="#">5</a></li>-->
+<!--    <li><a href="#">&raquo;</a></li>-->
+<!--</ul><br>-->
+
+
 </body>
 <script type="text/javascript"  src="js/crumb.js"></script>
 <script>
+
+
     function viewOrder(val){
         console.log(val);
         var artist= document.forms["searchForm"]["type"];
@@ -96,9 +111,9 @@
         }
         xmlhttp.onreadystatechange=function()
         {
-            if (xmlhttp.readyState===4&&xmlhttp.status===200)
+            if (xmlhttp.status===200)
             {
-                document.getElementById("Order").innerHTML=xmlhttp.responseText;
+                document.getElementById("searchResult").innerHTML=xmlhttp.responseText;
              //   alert(xmlhttp.responseText)
             }
         }
@@ -140,6 +155,54 @@ send_msg+="&search_req="+input;
                 alert("wrong:"+xmlhttp.status)
             }
         }
+    }
+    function changePage(val){
+        console.log(val);
+        var change_page =val;
+        var current_page  = document.getElementById("currentPage").value;
+        console.log(current_page);
+        if(val === -1 ){
+            change_page = ++current_page;
+            console.log(change_page);
+        }else if(val === -2){
+            change_page = --current_page;
+            console.log(change_page);
+
+        }
+        var artist= document.forms["searchForm"]["type"];
+        var input= document.forms["searchForm"]["search_req"].value;
+        var order = document.getElementById("order").value;
+        var len=artist.length;
+
+        var send_msg="registration=success&order="+order;
+        for(var i=0;i<len;i++){
+            if (artist[i].checked)
+                send_msg+="&type[]="+artist[i].value;
+        }
+        send_msg+="&search_req="+input;
+        send_msg+="&page="+change_page;
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            // alert(xmlhttp.readyState)
+            if (xmlhttp.status===200)
+            {
+                document.getElementById("searchResult").innerHTML=xmlhttp.responseText;
+
+            }
+        }
+        console.log(send_msg)
+        xmlhttp.open("POST","php/search_result.php",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send(send_msg);
     }
 </script>
 </html>

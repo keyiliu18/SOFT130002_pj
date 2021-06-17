@@ -18,7 +18,7 @@ echo "<script>console.log('$list_id');</script>";
 if ($list_id) {
    echo "<script>clearVal('$show_id');</script>";
     $sql = "DELETE FROM `wishlist` WHERE `wishlist`.`listID` = '$list_id' AND userID = $user";
-   if ($conn->query($sql) === TRUE) {
+   if ($con->query($sql) === TRUE) {
        //echo '<script>alert(\'删除成功\')</script>';
    }
 }

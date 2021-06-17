@@ -39,10 +39,20 @@ $wish="SELECT * FROM wishlist WHERE artworkID = '".$art_id."'";
 $result2 = mysqli_query($con,$wish);
 $collect_mag="COLLECT";
 $success=false;
-$user='1';
+if (isset($_SESSION["userName"])) {
+    $user = $_SESSION["userName"];
+    $user_msg="SELECT * FROM users WHERE name = '$user'";
+    $user_result = mysqli_query($con,$user_msg);
+    $user_row = mysqli_fetch_array($user_result);
+    $user_ID=$user_row['userID'];
+}else{
+    $user = "";
+    $user_ID = -1;
+}
+
 while($wish_row = mysqli_fetch_array($result2)){
 if($wish_row) {
-    if($wish_row['userID'] ==='1'){//如果是当前登录用户
+    if($user_ID>0 && $wish_row['userID'] == $user_ID){//如果是当前登录用户
     $collect_mag="COLLECTED";
     break;
     }
@@ -75,7 +85,7 @@ echo <<<EOT
                     <div style="text-align: center;padding-top: 10px">
                     <div style="text-align: center;padding-top: 10px;padding-bottom: 10px">
                     <form action="" method="post">
-                        <input type="hidden" name='user' value=$user>
+                        <input type="hidden" name='user' value=$user_ID>
                         <input type="hidden" name='artwork_id' value=$art_id>
                         <input type="submit" value=$collect_mag class="button" id="cButton">
                     </form>
@@ -93,15 +103,6 @@ mysqli_close($con);
 ?>
 </body>
 </html>
-</script>
-<script type="text/javascript" >
-    // collected=function (s){
-    //     document.getElementById('cButton').className="collected";
-    //     document.getElementById('cButton').value= "COLLECTED";
-    //     console.log(s);
-    // }
-</script>
-<script type="text/javascript" src="js/crumb.js"></script>
-
-
+<script type="text/javascript"  src="js/crumb.js"></script>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 

@@ -1,3 +1,4 @@
+
 function jump(path){
     var i=0;
     var jumpPath = path;
@@ -19,8 +20,27 @@ function jump(path){
             sessionStorage.removeItem(i.toString())
         }
     }
-    console.log(":::"+window.location)
+    //console.log(":::"+window.location)
     window.location.href = jumpPath
+}
+
+function logout(){
+    jQuery.ajax({
+        type: "post",
+        url: './php/log_out.php',
+        dataType: 'json',
+        data: {
+            like:'111',
+            out: "out",
+        },
+        success: function (resp) {
+            console.log(resp);
+        if(resp ==='success'){
+            alert(resp);
+        }else{
+              alert(resp);
+        }
+        }});
 }
 
 window.onload=function() {

@@ -6,9 +6,11 @@ $search_req =isset($_POST['search_req'])?$_POST['search_req']:'';
 $order=isset($_POST['order'])?$_POST['order']:'';
 $success = $_POST['registration'];
 $search_type=isset($_POST['type'])?$_POST['type']:[];
+$current_page=isset($_POST['page'])?$_POST['page']:1;
 $length = $search_type ? count($search_type):0;
 $show=array();
-
+$pagesize=5;
+$page_right=$current_page + $pagesize;
 $list = "SELECT * FROM artworks";
 for($i=0;$i<$length;$i++){
     $lists[] = "($search_type[$i] LIKE '%".$search_req."%')";
@@ -19,12 +21,32 @@ if($length>0) {
 }else{
     $list = "SELECT * FROM artworks  WHERE (title LIKE '%".$search_req."%') OR (artist LIKE '%".$search_req."%')OR (description LIKE '%".$search_req."%') ORDER BY `artworks`.`view` DESC";
 }
-$list=$list."ORDER BY `artworks`.`view` DESC";
-$result = mysqli_query($con,$list);
-if(!$result){
+$total_result = mysqli_query($con,$list);
+if(!mysqli_fetch_row($total_result)){
     echo 'no result';
-    require_once('all_artwork.php');
+    $list = "SELECT * FROM artworks";
+    $total_result = mysqli_query($con,$list);
 }
+switch ($order){
+    case 'view,desc':$list=$list." ORDER BY artworks.view DESC";break;
+    case 'price,desc':$list=$list." ORDER BY artworks.price DESC";break;
+    case 'view,asc':$list=$list." ORDER BY artworks.view ASC";break;
+    case 'price,asc':$list=$list." ORDER BY artworks.price ASC";break;
+    default:break;
+}
+$total_num=mysqli_num_rows($total_result);
+$max_page=ceil($total_num/$pagesize);
+if($current_page <1) {
+    $page=1;
+}
+if($current_page>$max_page) {
+    $page=$max_page;
+}
+$limit=" LIMIT ".($current_page-1)*$pagesize.",".$pagesize;
+$list=$list.$limit;
+echo $list."</br>";
+$result = mysqli_query($con,$list);
+
     while ($row = mysqli_fetch_array($result)) {
         $price = $row['price'];
         $view = $row['view'];
@@ -33,14 +55,6 @@ if(!$result){
     if (count($show)==0) {
         echo 'no result';
         require_once('all_artwork.php');
-    }
-    //对结果排序
-    switch ($order){
-        case 'view,desc':usort($show,'my_sort_view');break;
-        case 'price,desc':usort($show,'my_sort_price');break;
-        case 'view,asc':usort($show,'my_sort_view_asc');break;
-        case 'price,asc':usort($show,'my_sort_price_asc');break;
-        default:break;
     }
     for ($i = 0; $i < count($show); $i++) {
         $row = $show[$i];
@@ -64,5 +78,35 @@ if(!$result){
     </div><hr/>
 EOT;
     };
-
+echo <<<EOT
+  <li > TOTAL:$total_num PAGE NUM:$max_page CURRENT PAGE:$current_page </li >
+<div>
+<ul class="pagination" id="pagination">
+<input type="hidden" id="order" value=$order>
+<input type="hidden" id="currentPage" value=$current_page>
+EOT;
+if($current_page === 1){
+    echo "<li><a style='opacity: 50%;pointer-events: none'>&laquo;</a></li>";
+}else {
+    echo "<li><a onclick=changePage(-2)>&laquo;</a></li>";
+}
+if($current_page <=$pagesize){
+    for($i = 1;$i <= $pagesize && $i<=$max_page;$i++) {
+        echo "<li><a onclick=changePage($i) >$i</a></li >";
+    }
+}else if($max_page-$current_page<=5) {
+    for ($i = $max_page-$pagesize; $i <= $max_page;$i++) {
+        echo "<li><a onclick=changePage($i) >$i</a></li >";
+    }
+}else{
+    for($i = $current_page;$i <= $page_right && $i<=$max_page;$i++) {
+        echo "<li><a onclick=changePage($i) >$i</a></li >";
+    }
+}
+if($current_page >= $max_page) {
+    echo "  <li ><a style='opacity: 50%;pointer-events: none'>&raquo;</a ></li >";
+}else{
+    echo "  <li ><a onclick=changePage(-1)>&raquo;</a ></li >";
+}
+echo "</ul><br>";
 

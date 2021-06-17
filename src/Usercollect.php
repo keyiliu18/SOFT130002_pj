@@ -9,21 +9,26 @@
 <body>
 <div><?php include './components/header.php'?></div>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "123456";
-$user="1";
-// 创建连接
-$conn = new mysqli($servername, $username, $password);
-// 检测连接
-if ($conn->connect_error) {
-    die("连接失败: " . $conn->connect_error);
+include('php/config.php');
+if (isset($_SESSION["userName"])){
+    $user =$_SESSION["userName"];
+}else{
+    $user ="";
+    header("Location: login.html");
 }
-mysqli_select_db($conn,"artworks");
-$list="SELECT * FROM wishlist WHERE userID = '1'";
-$user_msg="SELECT * FROM users WHERE userID = '1'";
-$result = mysqli_query($conn,$list);
-$user_result = mysqli_query($conn,$user_msg);
+
+mysqli_select_db($con,"artworks");
+$user_msg="SELECT * FROM users WHERE name = '$user'";
+$user_result = mysqli_query($con,$user_msg);
+$user_row = mysqli_fetch_array($user_result);
+$user_ID=$user_row['userID'];
+$username = $user_row['name'];
+$email = $user_row['email'];
+$tel = $user_row['tel']?$user_row['tel']:'——';
+$address = $user_row['address'];
+$balance=$user_row['balance'];
+$list="SELECT * FROM wishlist WHERE userID = '$user_ID'";
+$result = mysqli_query($con,$list);
 echo '<div class="back">';
 echo '    <div class="containerLeft">';
 while($row = mysqli_fetch_array($result))
@@ -31,7 +36,7 @@ while($row = mysqli_fetch_array($result))
     $art_id=$row['artworkID'];
     $list_id=$row['listID'];
     $collection="SELECT * FROM artworks WHERE artworkID = '".$art_id."'";
-    $result2 = mysqli_query($conn,$collection);
+    $result2 = mysqli_query($con,$collection);
     while($wish_row = mysqli_fetch_array($result2)) {
         $title = $wish_row['title'];
         $author = $wish_row['artist'];
@@ -55,7 +60,7 @@ while($row = mysqli_fetch_array($result))
                          <form action="" method="post" onsubmit="return comf('$title')">             
                         <input type="hidden" name='listID' value=$list_id>    
                         <input type="hidden" name='showID' value='intro$list_id'>        
-                        <input type="hidden" name='userID' value=$user>                            
+                        <input type="hidden" name='userID' value=$user_ID>                            
                         <input type="submit" value="DELETE" onclick="myFunction('$title')">
                     </form>                   
                     </span>
@@ -70,13 +75,7 @@ EOF;
 echo'</div>';
 mysqli_free_result($result);
 
-$user_row = mysqli_fetch_array($user_result);
-$user_ID=$user_row['userID'];
-$username = $user_row['name'];
-$email = $user_row['email'];
-$tel = $user_row['tel'];
-$address = $user_row['address'];
-$balance=$user_row['balance'];
+
 
 echo<<<EOF
     <div class="containerRight">
@@ -110,11 +109,10 @@ EOF;
 <script>
     function comf(name){
         var person=confirm("是否删除 "+name +"的收藏？");
-        if (person===true){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return person === true;
+    }
+    function  myFunction(val){
+        console.log(val);
     }
 </script>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
