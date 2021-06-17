@@ -66,7 +66,7 @@ window.onload=function() {
     //    console.log("sessionStorage:---->"+sessionStorage.getItem('0'))
      //   console.log("sessionStorage.length:---->"+sessionStorage.length)
     for (i=0;i<sessionStorage.length;i++){
-      //  console.log(i+" :"+sessionStorage.getItem(i.toString()))
+      console.log(i+" :"+sessionStorage.getItem(i.toString()))
     }
         var breadcrumbTrail = "<div style='display: flex'>";
     for (i=0;i<sessionStorage.length;i++){

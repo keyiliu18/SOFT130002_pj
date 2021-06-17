@@ -1,3 +1,14 @@
+<?php
+include './components/header.php'?>
+<?php
+if(isset($_GET["q"])){
+    $_SESSION['art'] = $_GET["q"];
+    $q = $_GET["q"];
+}else{
+    $q = $_SESSION['art'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,18 +20,11 @@
 </head>
 <body>
 <div>
-<?php
-include './components/header.php'?>
 </div>
 <?php
+include('php/config.php');
 error_reporting(E_ALL & ~E_NOTICE);
-$con = mysqli_connect('localhost', 'root', '123456');
-$q = $_GET["q"];
-if (!$con) {
-    die('Could not connect: ' . mysqli_error($con));
-}
-mysqli_select_db($con, "artworks");
-mysqli_set_charset($con, "utf8");
+//$q = $_GET["q"];
 $sql="SELECT * FROM artworks WHERE title = '".$q."'";
 $result = mysqli_query($con,$sql);
 $row = mysqli_fetch_array($result);
@@ -88,6 +92,7 @@ echo <<<EOT
                         <input type="hidden" name='user' value=$user_ID>
                         <input type="hidden" name='artwork_id' value=$art_id>
                         <input type="submit" value=$collect_mag class="button" id="cButton">
+                        <div id="NotLogin" style="color: #970800"></div>
                     </form>
                         </div>
                     </div>

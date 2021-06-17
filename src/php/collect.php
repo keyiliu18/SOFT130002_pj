@@ -12,7 +12,8 @@
             $success=false;
         }
     }else if($u && $u <0){
-        echo '<script>alert(\'please login!\');</script>';
+//        echo '<script>alert(\'please login!\');</script>';
+        echo '<script>document.getElementById("NotLogin").innerText=\'please login!\';</script>';
     }
     else{$success=false;}
 

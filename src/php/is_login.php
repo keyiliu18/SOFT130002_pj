@@ -1,7 +1,7 @@
 <?php
 //  防止全局变量造成安全隐患
 $admin = false;
-//  启动会话，这步必不可少
+//  启动会话
 session_start();
 //  判断是否登陆
 if (isset($_SESSION["userLogin"]) && $_SESSION["userLogin"] === true) {

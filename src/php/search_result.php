@@ -44,7 +44,7 @@ if($current_page>$max_page) {
 }
 $limit=" LIMIT ".($current_page-1)*$pagesize.",".$pagesize;
 $list=$list.$limit;
-echo $list."</br>";
+//echo $list."</br>";
 $result = mysqli_query($con,$list);
 
     while ($row = mysqli_fetch_array($result)) {
@@ -52,10 +52,10 @@ $result = mysqli_query($con,$list);
         $view = $row['view'];
         $show[] = $row;
     }
-    if (count($show)==0) {
-        echo 'no result';
-        require_once('all_artwork.php');
-    }
+//    if (count($show)==0) {
+//        echo 'no result';
+//        require_once('all_artwork.php');
+//    }
     for ($i = 0; $i < count($show); $i++) {
         $row = $show[$i];
         $title = $row['title'];
@@ -79,27 +79,28 @@ $result = mysqli_query($con,$list);
 EOT;
     };
 echo <<<EOT
-  <li > TOTAL:$total_num PAGE NUM:$max_page CURRENT PAGE:$current_page </li >
+  <li>Total:$total_num | Page Number:$max_page | Current Page:$current_page </li >
 <div>
 <ul class="pagination" id="pagination">
 <input type="hidden" id="order" value=$order>
 <input type="hidden" id="currentPage" value=$current_page>
 EOT;
+//根据current_page生成页码
 if($current_page === 1){
     echo "<li><a style='opacity: 50%;pointer-events: none'>&laquo;</a></li>";
-}else {
+}else{
     echo "<li><a onclick=changePage(-2)>&laquo;</a></li>";
 }
 if($current_page <=$pagesize){
     for($i = 1;$i <= $pagesize && $i<=$max_page;$i++) {
-        echo "<li><a onclick=changePage($i) >$i</a></li >";
+        echo "<li><a onclick=changePage($i) >$i</a></li>";
     }
 }else if($max_page-$current_page<=5) {
     for ($i = $max_page-$pagesize; $i <= $max_page;$i++) {
         echo "<li><a onclick=changePage($i) >$i</a></li >";
     }
 }else{
-    for($i = $current_page;$i <= $page_right && $i<=$max_page;$i++) {
+    for($i = $current_page;$i < $page_right && $i<=$max_page;$i++) {
         echo "<li><a onclick=changePage($i) >$i</a></li >";
     }
 }
